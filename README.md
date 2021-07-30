@@ -9,6 +9,7 @@ The visual node system allows for dialog nodes, conditional nodes, choice nodes 
 
 Just install the plugin in the addon folder and enable it in the Godot editor settings.
 
+The plugin is work in progress. It is still pretty raw and I will probably add more features in the future.
 
 https://user-images.githubusercontent.com/56018661/127719492-557f85c4-ca9a-445c-8da9-7116be51db3c.mp4
 
