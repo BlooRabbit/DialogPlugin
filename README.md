@@ -9,7 +9,8 @@ The files can be read by a simple Godot dialog scene and adapted to your needs a
 
 The visual node system allows for dialog nodes, conditional nodes, choice nodes and signals nodes. 
 
-Start by creating a "new file", which will add a root node. Then plugin whatever other nodes you want.
+Start by creating a "new file", which will add a root node. Then plugin whatever other nodes you want. "print" prints out the json to your console.
+Don't forget to save your file !
 
 The plugin currently supports two languages, but it is pretty easy to add other languages, once you understand the way it works.
 
