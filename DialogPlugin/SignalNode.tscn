@@ -1,0 +1,143 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/Dialogs/SignalNode.gd" type="Script" id=1]
+[ext_resource path="res://addons/Dialogs/textedit.stylebox" type="StyleBox" id=2]
+[ext_resource path="res://addons/Dialogs/nodes.stylebox" type="StyleBox" id=3]
+[ext_resource path="res://addons/Dialogs/optionbutton.stylebox" type="StyleBox" id=4]
+
+[node name="SignalNode" type="GraphNode" groups=[
+"dialognode",
+]]
+margin_right = 145.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 200, 200 )
+rect_clip_content = true
+custom_styles/frame = ExtResource( 3 )
+custom_styles/selectedframe = ExtResource( 3 )
+title = "Signal"
+show_close = true
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 275.0
+margin_bottom = 164.0
+
+[node name="KeyBox" type="HBoxContainer" parent="VBox"]
+margin_right = 245.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="VBox/KeyBox"]
+margin_right = 27.0
+margin_bottom = 14.0
+text = "Key:"
+
+[node name="Keylabel" type="Label" parent="VBox/KeyBox"]
+margin_left = 31.0
+margin_right = 31.0
+margin_bottom = 14.0
+
+[node name="HSeparator2" type="HSeparator" parent="VBox"]
+margin_top = 18.0
+margin_right = 245.0
+margin_bottom = 22.0
+
+[node name="HBoxVar" type="HBoxContainer" parent="VBox"]
+margin_top = 26.0
+margin_right = 245.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBox/HBoxVar"]
+margin_top = 3.0
+margin_right = 41.0
+margin_bottom = 17.0
+text = "Signal:"
+
+[node name="Content" type="TextEdit" parent="VBox/HBoxVar"]
+margin_left = 45.0
+margin_right = 245.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 2 )
+
+[node name="HBoxType" type="HBoxContainer" parent="VBox"]
+margin_top = 50.0
+margin_right = 245.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBox/HBoxType"]
+margin_top = 1.0
+margin_right = 34.0
+margin_bottom = 15.0
+text = "Type:"
+
+[node name="Content" type="OptionButton" parent="VBox/HBoxType"]
+margin_left = 38.0
+margin_right = 245.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "string"
+items = [ "string", null, false, 0, null, "number", null, false, 1, null ]
+selected = 0
+
+[node name="HBoxValue" type="HBoxContainer" parent="VBox"]
+margin_top = 70.0
+margin_right = 245.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBox/HBoxValue"]
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 17.0
+text = "Value"
+
+[node name="Content" type="TextEdit" parent="VBox/HBoxValue"]
+margin_left = 39.0
+margin_right = 245.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 200, 20 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+margin_top = 94.0
+margin_right = 245.0
+margin_bottom = 98.0
+
+[node name="Nexttitle" type="Label" parent="VBox"]
+margin_top = 102.0
+margin_right = 245.0
+margin_bottom = 116.0
+text = "Next node:"
+
+[node name="Nextnode" type="Label" parent="VBox"]
+margin_top = 120.0
+margin_right = 245.0
+margin_bottom = 134.0
+
+[connection signal="close_request" from="." to="." method="_close_request"]
+[connection signal="raise_request" from="." to="." method="_on_Singlenode_clicked"]
+[connection signal="resize_request" from="." to="." method="_on_resize_request"]
+[connection signal="text_changed" from="VBox/HBoxVar/Content" to="." method="_on_values_changed"]
+[connection signal="item_selected" from="VBox/HBoxType/Content" to="." method="_on_type_selected"]
+[connection signal="text_changed" from="VBox/HBoxValue/Content" to="." method="_on_values_changed"]

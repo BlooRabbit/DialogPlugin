@@ -1,0 +1,195 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/Dialogs/Mainpanel.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxLine" id=1]
+color = Color( 1, 0, 0, 1 )
+grow_begin = 0.0
+grow_end = 5.0
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 0, 0, 1 )
+thickness = 3
+
+[node name="DialogEditor" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1280, 720 )
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxMenu" type="HBoxContainer" parent="VBox"]
+margin_right = 1280.0
+margin_bottom = 20.0
+
+[node name="Title" type="Label" parent="VBox/HBoxMenu"]
+margin_top = 3.0
+margin_right = 104.0
+margin_bottom = 17.0
+text = "DIALOG EDITOR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator" type="VSeparator" parent="VBox/HBoxMenu"]
+margin_left = 108.0
+margin_right = 112.0
+margin_bottom = 20.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="Openbutton" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 116.0
+margin_right = 187.0
+margin_bottom = 20.0
+text = "Open file"
+
+[node name="Savebutton" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 191.0
+margin_right = 256.0
+margin_bottom = 20.0
+text = "Save file"
+
+[node name="Newjson" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 260.0
+margin_right = 324.0
+margin_bottom = 20.0
+text = "New file"
+
+[node name="CurrentFile" type="Label" parent="VBox/HBoxMenu"]
+margin_left = 328.0
+margin_top = 3.0
+margin_right = 407.0
+margin_bottom = 17.0
+text = "Current file: "
+
+[node name="Filename" type="Label" parent="VBox/HBoxMenu"]
+margin_left = 411.0
+margin_top = 3.0
+margin_right = 451.0
+margin_bottom = 17.0
+text = "[none]"
+
+[node name="VSeparator2" type="VSeparator" parent="VBox/HBoxMenu"]
+margin_left = 455.0
+margin_right = 459.0
+margin_bottom = 20.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="Language" type="Label" parent="VBox/HBoxMenu"]
+margin_left = 463.0
+margin_top = 3.0
+margin_right = 526.0
+margin_bottom = 17.0
+text = "Language:"
+
+[node name="Lang-en" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 530.0
+margin_right = 558.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "en"
+
+[node name="Lang-fr" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 562.0
+margin_right = 583.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 0.66, 0.66, 0.66, 1 )
+text = "fr"
+
+[node name="VSeparator3" type="VSeparator" parent="VBox/HBoxMenu"]
+margin_left = 587.0
+margin_right = 591.0
+margin_bottom = 20.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="Dialog" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 595.0
+margin_right = 647.0
+margin_bottom = 20.0
+text = "Dialog"
+
+[node name="Condition" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 651.0
+margin_right = 724.0
+margin_bottom = 20.0
+text = "Condition"
+
+[node name="Choice" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 728.0
+margin_right = 783.0
+margin_bottom = 20.0
+text = "Choice"
+
+[node name="Signal" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 787.0
+margin_right = 836.0
+margin_bottom = 20.0
+text = "Signal"
+
+[node name="VSeparator4" type="VSeparator" parent="VBox/HBoxMenu"]
+margin_left = 840.0
+margin_right = 844.0
+margin_bottom = 20.0
+custom_styles/separator = SubResource( 1 )
+
+[node name="Print" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 848.0
+margin_right = 890.0
+margin_bottom = 20.0
+text = "Print"
+
+[node name="Refresh" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 894.0
+margin_right = 954.0
+margin_bottom = 20.0
+text = "Refresh"
+
+[node name="Clear" type="Button" parent="VBox/HBoxMenu"]
+margin_left = 958.0
+margin_right = 1002.0
+margin_bottom = 20.0
+text = "Clear"
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 28.0
+custom_styles/separator = SubResource( 2 )
+
+[node name="Panel" type="GraphEdit" parent="VBox"]
+margin_top = 32.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+right_disconnects = true
+scroll_offset = Vector2( 0, -11 )
+use_snap = false
+
+[connection signal="pressed" from="VBox/HBoxMenu/Openbutton" to="." method="_on_Openbutton_pressed"]
+[connection signal="pressed" from="VBox/HBoxMenu/Savebutton" to="." method="_on_Savebutton_pressed"]
+[connection signal="pressed" from="VBox/HBoxMenu/Newjson" to="." method="Newjson"]
+[connection signal="pressed" from="VBox/HBoxMenu/Lang-en" to="." method="langchange" binds= [ "en" ]]
+[connection signal="pressed" from="VBox/HBoxMenu/Lang-fr" to="." method="langchange" binds= [ "fr" ]]
+[connection signal="pressed" from="VBox/HBoxMenu/Dialog" to="." method="NewDialog"]
+[connection signal="pressed" from="VBox/HBoxMenu/Condition" to="." method="NewCondition"]
+[connection signal="pressed" from="VBox/HBoxMenu/Choice" to="." method="NewChoice"]
+[connection signal="pressed" from="VBox/HBoxMenu/Signal" to="." method="NewSignal"]
+[connection signal="pressed" from="VBox/HBoxMenu/Print" to="." method="printjson"]
+[connection signal="pressed" from="VBox/HBoxMenu/Refresh" to="." method="refreshjson"]
+[connection signal="pressed" from="VBox/HBoxMenu/Clear" to="." method="cleargraph"]
+[connection signal="connection_request" from="VBox/Panel" to="." method="_on_Panel_connection_request"]
+[connection signal="disconnection_request" from="VBox/Panel" to="." method="_on_Panel_disconnection_request"]

@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/Dialogs/ChoiceNode.gd" type="Script" id=1]
+[ext_resource path="res://addons/Dialogs/textedit.stylebox" type="StyleBox" id=2]
+[ext_resource path="res://addons/Dialogs/nodes.stylebox" type="StyleBox" id=3]
+
+[node name="ChoiceNode" type="GraphNode" groups=[
+"dialognode",
+]]
+margin_right = 270.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 200, 200 )
+rect_clip_content = true
+custom_styles/frame = ExtResource( 3 )
+custom_styles/selectedframe = ExtResource( 3 )
+title = "Choice"
+show_close = true
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 240.0
+margin_bottom = 160.0
+
+[node name="KeyBox" type="HBoxContainer" parent="VBox"]
+margin_right = 210.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="VBox/KeyBox"]
+margin_right = 27.0
+margin_bottom = 14.0
+text = "Key:"
+
+[node name="Keylabel" type="Label" parent="VBox/KeyBox"]
+margin_left = 31.0
+margin_right = 31.0
+margin_bottom = 14.0
+
+[node name="HSeparator2" type="HSeparator" parent="VBox"]
+margin_top = 18.0
+margin_right = 210.0
+margin_bottom = 22.0
+
+[node name="Content" type="TextEdit" parent="VBox"]
+margin_top = 26.0
+margin_right = 210.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 200, 60 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/normal = ExtResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+margin_top = 90.0
+margin_right = 210.0
+margin_bottom = 94.0
+
+[node name="Nexttitle" type="Label" parent="VBox"]
+margin_top = 98.0
+margin_right = 210.0
+margin_bottom = 112.0
+text = "Next node:"
+
+[node name="Nextnode" type="Label" parent="VBox"]
+margin_top = 116.0
+margin_right = 210.0
+margin_bottom = 130.0
+
+[connection signal="close_request" from="." to="." method="_close_request"]
+[connection signal="raise_request" from="." to="." method="_on_Singlenode_clicked"]
+[connection signal="resize_request" from="." to="." method="_on_resize_request"]
+[connection signal="text_changed" from="VBox/Content" to="." method="_on_values_changed"]
