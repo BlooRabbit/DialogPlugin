@@ -9,6 +9,7 @@ extends Panel
 # "signals" contains a dictionaries of type {"signalname":{"Number":"2"}} 
 # "choices" contains an array with dictionaries of type {"text":"blabla","next":"uuid"}
 # "conditions" contains an array with dictionaries of type {"variable":{"value":false,"operator":"equal","type":"boolean"},"next":"uuid"}
+# "__editor" contains data for editor display only
 
 var open_dialog=null
 var save_dialog=null
@@ -110,8 +111,16 @@ func Newjson():
 # --- Node Creation ---
 # ---------------------
 
-func NewDialog():
-	var uiid=IDGen.v4() # Create and place a dialogue node
+func checkifroot():
+	var nodesingraph:Array
+	for child in $VBox/Panel.get_children():
+		if child.is_in_group("dialognode"): nodesingraph.push_back(child.title)
+	if not nodesingraph.has("Root"): Newjson()
+
+func NewDialog(): # Create and place a dialogue node
+	checkifroot()
+	yield(get_tree().create_timer(0.2),"timeout")
+	var uiid=IDGen.v4() 
 	var newnode:GraphNode=dialognode.instance()
 	$VBox/Panel.add_child(newnode)
 	newnode.title="Dialogue"
@@ -121,11 +130,13 @@ func NewDialog():
 	newnode.resizable=false
 	newnode.show_close=true
 	newnode.set_slot(0,true,0,Color.turquoise,true,0,Color.turquoise)
-	newnode.offset=$VBox/Panel.scroll_offset+Vector2(50,50)
+	newnode.offset=$VBox/Panel.scroll_offset+Vector2(100,50)
 	refreshjson()
 	
-func NewCondition():
-	var uiid=IDGen.v4() # Create and place a condition node
+func NewCondition(): # Create and place a condition node
+	checkifroot()
+	yield(get_tree().create_timer(0.2),"timeout")
+	var uiid=IDGen.v4() 
 	var newnode:GraphNode=ConditionNode.instance()
 	$VBox/Panel.add_child(newnode)
 	newnode.nodeid=uiid
@@ -136,8 +147,10 @@ func NewCondition():
 	newnode.offset=$VBox/Panel.scroll_offset+Vector2(50,50)
 	refreshjson()
 
-func NewChoice():
-	var uiid=IDGen.v4() # Create and place a choice node
+func NewChoice(): # Create and place a choice node
+	checkifroot()
+	yield(get_tree().create_timer(0.2),"timeout")
+	var uiid=IDGen.v4() 
 	var newnode:GraphNode=ChoiceNode.instance()
 	$VBox/Panel.add_child(newnode)
 	newnode.nodeid=uiid
@@ -148,8 +161,10 @@ func NewChoice():
 	newnode.offset=$VBox/Panel.scroll_offset+Vector2(50,50)
 	refreshjson()
 
-func NewSignal():
-	var uiid=IDGen.v4() # Create and place a condition node
+func NewSignal(): # Create and place a condition node
+	checkifroot()
+	yield(get_tree().create_timer(0.2),"timeout")
+	var uiid=IDGen.v4() 
 	var newnode:GraphNode=SignalNode.instance()
 	$VBox/Panel.add_child(newnode)
 	newnode.nodeid=uiid
