@@ -45,9 +45,9 @@ func _ready():
 	
 	showlang()
 
-func _exit_tree():
-	if open_dialog : open_dialog.queue_free()
-	if save_dialog : save_dialog.queue_free()
+#func _exit_tree():
+#	if open_dialog : open_dialog.queue_free()
+#	if save_dialog : save_dialog.queue_free()
 
 # -------------------------
 # ---   File dialogs    ---
@@ -271,7 +271,7 @@ func refreshjson(): # json structure : https://github.com/Levrault/LE-dialogue-e
 
 				newjson[node.nodeid]=nodecontent
 
-	newjson["__editor"]=editorstructure
+	newjson["__editor"]=editorstructure # TO DO : track and delete doubles
 	
 	jsonfile=newjson
 	
@@ -407,9 +407,14 @@ func displaynodes(): # NB: jsonfile contains the whole file
 			if nodefrom=="" or nodeto=="": print("nodes are not recognized: nodefrom="+str(nodefrom)+" - nodeto=" + str(nodeto))
 			else:
 				$VBox/Panel.connect_node(nodefrom,0,nodeto,0)
-#				$VBox/Panel.update()
-		# display next node
-		if condition.has("next"):newnode.get_node("VBox/Nextnode").text=condition["next"]
+		# display next node and connect it
+		if condition.has("next"):
+			newnode.get_node("VBox/Nextnode").text=condition["next"]
+			var nodefrom=findnodewithID(condition["uuid"])
+			var nodeto=findnodewithID(condition["next"])
+			if nodefrom=="" or nodeto=="": print("nodes are not recognized: nodefrom="+str(nodefrom)+" - nodeto=" + str(nodeto))
+			else:
+				$VBox/Panel.connect_node(nodefrom,0,nodeto,0)
 
 	# create choice nodes
 	for choice in jsonstruct["choices"]:
@@ -429,7 +434,6 @@ func displaynodes(): # NB: jsonfile contains the whole file
 			if nodefrom=="" or nodeto=="": print("nodes are not recognized: nodefrom="+str(nodefrom)+" - nodeto=" + str(nodeto))
 			else:
 				$VBox/Panel.connect_node(nodefrom,0,nodeto,0)
-#				$VBox/Panel.update()
 		# display next node
 		if choice["next"]:newnode.get_node("VBox/Nextnode").text=choice["next"]
 
@@ -453,13 +457,12 @@ func displaynodes(): # NB: jsonfile contains the whole file
 			if nodefrom=="" or nodeto=="": print("nodes are not recognized: nodefrom="+str(nodefrom)+" - nodeto=" + str(nodeto))
 			else:
 				$VBox/Panel.connect_node(nodefrom,0,nodeto,0)
-#				$VBox/Panel.update()
 		# display next node
 #		if condition["next"]:newnode.get_node("VBox/Nextnode").text=condition["next"]
 
 		# For each dialog node identify "next" nodes and connect them
 	for node in jsonfile.keys():
-		if node!="__editor":
+		if node!="__editor": # only use dialogue nodes and root node
 			if jsonfile[node].has("next"):
 				var nodefrom=findnodewithID(node)
 				var nodeto=findnodewithID(jsonfile[node]["next"])
@@ -517,7 +520,7 @@ func get_json(file_path: String) -> Dictionary:
 
 func _on_Panel_connection_request(from, from_slot, to, to_slot):
 	$VBox/Panel.connect_node(from, from_slot, to, to_slot)
-	if $VBox/Panel.get_node(to).title=="Dialogue":
+	if $VBox/Panel.get_node(to).title=="Dialogue" or $VBox/Panel.get_node(to).title=="Signal":
 		$VBox/Panel.get_node(from+"/VBox/Nextnode").text=$VBox/Panel.get_node(to).nodeid
 	refreshjson()
 
