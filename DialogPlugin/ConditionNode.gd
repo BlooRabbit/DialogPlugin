@@ -5,15 +5,15 @@ signal nodechanged
 var nodeid:String="" # stores unique ID of node
 var nodecontent:Dictionary={} # stores content of node in all languages
 var variable=""
-var type=""
-var operator=""
+var type="boolean"
+var operator="equal"
 var value=""
 onready var Editor:Object= get_parent().get_parent().get_parent()
 
 func _ready():
 	updatenode()
-	$VBox/HBoxType/Content.selected=0
-	$VBox/HBoxOper/Content.selected=0
+	$VBox/HBoxType/Content.select(0)
+	$VBox/HBoxOper/Content.select(0)
 #	connect("nodechanged",Editor, "refreshjson")
 
 func _close_request():
