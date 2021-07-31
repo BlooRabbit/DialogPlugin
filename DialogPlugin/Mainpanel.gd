@@ -490,34 +490,6 @@ func findnodewithID(ID):
 			if node.nodeid==ID: return node.name
 	return ""
 
-func createsignals(node): # node is a node key
-	# check if node has choices and create the choice nodes
-	if jsonfile[node].has("signals"):
-		var conditions=(jsonfile[node]["signals"])
-		var count=0 # counts the number of conditions
-		var jsonstruct=jsonfile["__editor"] # contains editor information
-		for key in jsonstruct["signals"]: # parse through json's editor instructions
-			if key["parent"]==node:
-				var newnode=dialognode.instance()
-				$VBox/Panel.add_child(newnode)
-				var uuid=key["uuid"]
-				newnode.nodeid=uuid
-				newnode.title="Signal"
-				newnode.get_node("VBox/KeyBox/Keylabel").text=uuid
-				newnode.offset=Vector2(key["offset"][0],key["offset"][1])
-				newnode.set_slot(0,true,0,Color.turquoise,true,0,Color.turquoise)
-				# display choice and next node
-				newnode.get_node("VBox/Content").text=str(jsonfile[node]["signals"])
-				newnode.get_node("VBox/Nexttitle").visible=false
-				# store node content in the nodecontent variable
-				# TO DO : language missing (! nodecontent is a dictionnary)
-				newnode.nodecontent=JSON.print(jsonfile[node]["signals"])
-				# connect signal node to dialogue node 
-				var nodeto =findnodewithID(uuid)
-				var nodefrom= findnodewithID(node)
-				if nodefrom!="" and nodeto!="":nodepanel.connect_node(nodefrom,0,nodeto,0)
-				count+=1
-
 # -------------------
 # --- JSON parser ---
 # -------------------
