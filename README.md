@@ -1,5 +1,5 @@
 # DialogPlugin
-Godot plugin for creating dialog jsons
+Godot plugin for creating dialog jsons with Godot 3.x. 
 
 This Godot plugin is designed to create json files containing dialogs, based on a visual nodes system.
 
